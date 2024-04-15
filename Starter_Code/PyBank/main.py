@@ -41,6 +41,32 @@ def calc_average_change(csvreader):
     average_change = sum(differences) / len(differences)
     return average_change
 
+# Create block for MIN MAX CHANGE
+def calc_max_min_change(csvreader):
+    max_change = None
+    min_change = None
+    max_change_date = None
+    min_change_date = None
+    prev_value = None
+    prev_date = None
+    # Skip header row
+    next(csvreader)  
+    
+    for row in csvreader:
+        date = row[0]
+        value = float(row[1])
+        if prev_value is not None:
+            change = value - prev_value
+            if max_change is None or change> max_change:
+                max_change = change
+                max_change_date = prev_date
+            if min_change is None or change < min_change:
+                min_change = change
+                min_change_date = prev_date
+        prev_value = value
+        prev_date = date
+    return max_change, max_change_date, min_change, min_change_date
+
 # Use the def block with open command 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter= ',')
@@ -55,11 +81,21 @@ with open(csvpath) as csvfile:
     csvfile.seek(0)
     average_change = calc_average_change(csvreader)
 
+    csvfile.seek(0)
+    max_increase, max_increase_date, min_decrease, min_decrease_date = calc_max_min_change(csvreader)
+
 # PRINT STATION
+print("Financial Analysis")
+print("------------------------------------")
 print(f'Total Months: {total_months_count}')
 # print(f'Total Profit: {total_profit}')
 # print(f'Total Loss: {total_loss}')
 print(f'Net Total: ${net_total}')
 average_change_form = round(average_change, 2)
 print(f'Average Change: ${average_change_form}')
+max_increase_form = int(max_increase)
+print(f'Greatest Increase in Profits: {max_increase_date} (${max_increase_form})')
+min_decrease_form = int(min_decrease)
+print(f'Greatest Decrease in Profits: {min_decrease_date} (${min_decrease_form})')
+
 
