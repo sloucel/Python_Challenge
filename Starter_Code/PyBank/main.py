@@ -24,7 +24,24 @@ def net_profitloss(csvreader):
             loss += value
     return profit, loss
     
-# Use the def block 
+# Create block for AVERAGE CHANGE
+def calc_average_change(csvreader):
+    differences = [ ]
+    prev_value = None
+    for row_lp in csvreader:
+        if csvreader.line_num == 1:
+            continue
+        try: value = float(row_lp[1])
+        except ValueError:
+            continue
+        if prev_value is not None:
+            difference = value - prev_value
+            differences.append(difference)
+        prev_value = value
+    average_change = sum(differences) / len(differences)
+    return average_change
+
+# Use the def block with open command 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter= ',')
     next(csvreader)
@@ -35,9 +52,14 @@ with open(csvpath) as csvfile:
     total_profit, total_loss = net_profitloss(csvreader)
     net_total = total_profit + total_loss
 
+    csvfile.seek(0)
+    average_change = calc_average_change(csvreader)
+
 # PRINT STATION
 print(f'Total Months: {total_months_count}')
 # print(f'Total Profit: {total_profit}')
 # print(f'Total Loss: {total_loss}')
 print(f'Net Total: ${net_total}')
+average_change_form = round(average_change, 2)
+print(f'Average Change: ${average_change_form}')
 
