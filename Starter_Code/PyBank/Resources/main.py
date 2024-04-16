@@ -1,19 +1,19 @@
 #Financial Analysis
-# Import os module
+## Import os module
 import os
 import csv
 
-# Create csvpath
+## Create csvpath
 csvpath = os.path.join('..', 'Resources','budget_data.csv')
 
-# Create block to calculate the the TOTAL MONTHS
+## Create block to calculate the the TOTAL MONTHS
 def total_months(csvreader):
     month_count = 0
     for row_lp in csvreader:
         month_count += 1
     return month_count
 
-# Create block to calculate the NET PROFIT
+## Create block to calculate the NET PROFIT
 def net_profitloss(csvreader):
     profit = 0
     loss = 0 
@@ -25,7 +25,7 @@ def net_profitloss(csvreader):
             loss += value
     return profit, loss
 
-# Create block for AVERAGE CHANGE
+## Create block for AVERAGE CHANGE
 def calc_average_change(csvreader):
     differences = [ ]
     prev_value = None
@@ -42,7 +42,7 @@ def calc_average_change(csvreader):
     average_change = sum(differences) / len(differences)
     return average_change
 
-# Create block for MIN MAX CHANGE
+## Create block for MIN MAX CHANGE
 def calc_max_min_change(csvreader):
     max_change = None
     min_change = None
@@ -68,7 +68,7 @@ def calc_max_min_change(csvreader):
         prev_date = date
     return max_change, max_change_date, min_change, min_change_date
 
-# Use the def block 
+## Use the def block 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter= ',')
     next(csvreader)
@@ -87,12 +87,12 @@ with open(csvpath) as csvfile:
     max_increase, max_increase_date, min_decrease, min_decrease_date = calc_max_min_change(csvreader)
 
 
-# PRINT STATION
+## PRINT STATION
 print("Financial Analysis")
 print("------------------------------------")
 print(f'Total Months: {total_months_count}')
-# print(f'Total Profit: {total_profit}')
-# print(f'Total Loss: {total_loss}')
+##### print(f'Total Profit: {total_profit}')
+##### print(f'Total Loss: {total_loss}')
 print(f'Net Total: ${net_total}')
 average_change_form = round(average_change, 2)
 print(f'Average Change: ${average_change_form}')
@@ -101,6 +101,12 @@ print(f'Greatest Increase in Profits: {max_increase_date} (${max_increase_form})
 min_decrease_form = int(min_decrease)
 print(f'Greatest Decrease in Profits: {min_decrease_date} (${min_decrease_form})')
 
-#TEST PUSH
+## Export results to a new csv file and place in the the Analysis Folder
+### Output_path
+output_path = os.path.join("..", 'Analysis', 'financial_analysis.csv')
 
-# python main.py
+## Taken from Python Module, Day 2, Activity 10 "Ins_ReadCSV"
+with open(output_path, "w") as csvfile:
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(['Total Months', 'Net Total', 'Average Change', 'Greatest Increase Date', 'Greatest Increase Amount', 'Greatest Decrease Date', 'Greatest Decrease Amount'])
+    csvwriter.writerow([total_months_count, net_total, average_change, max_increase_date, max_increase, min_decrease_date, min_decrease])
