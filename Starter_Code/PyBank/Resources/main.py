@@ -1,3 +1,4 @@
+#Financial Analysis
 # Import os module
 import os
 import csv
@@ -85,6 +86,7 @@ with open(csvpath) as csvfile:
     csvfile.seek(0)
     max_increase, max_increase_date, min_decrease, min_decrease_date = calc_max_min_change(csvreader)
 
+
 # PRINT STATION
 print("Financial Analysis")
 print("------------------------------------")
@@ -98,5 +100,7 @@ max_increase_form = int(max_increase)
 print(f'Greatest Increase in Profits: {max_increase_date} (${max_increase_form})')
 min_decrease_form = int(min_decrease)
 print(f'Greatest Decrease in Profits: {min_decrease_date} (${min_decrease_form})')
+
+#TEST PUSH
 
 # python main.py
