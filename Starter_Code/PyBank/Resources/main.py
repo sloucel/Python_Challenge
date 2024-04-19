@@ -68,7 +68,7 @@ def calc_max_min_change(csvreader):
         prev_date = date
     return max_change, max_change_date, min_change, min_change_date
 
-## Use the def block 
+## Open file and use define function blocks from above. 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter= ',')
     next(csvreader)
@@ -103,10 +103,21 @@ print(f'Greatest Decrease in Profits: {min_decrease_date} (${min_decrease_form})
 
 ## Export results to a new csv file and place in the the Analysis Folder
 ### Output_path
-output_path = os.path.join("..", 'Analysis', 'financial_analysis.csv')
+output_path = os.path.join("..", 'Analysis', 'financial_analysis.txt')
 
 ## Taken from Python Module, Day 2, Activity 10 "Ins_ReadCSV"
-with open(output_path, "w") as csvfile:
-    csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(['Total Months', 'Net Total', 'Average Change', 'Greatest Increase Date', 'Greatest Increase Amount', 'Greatest Decrease Date', 'Greatest Decrease Amount'])
-    csvwriter.writerow([total_months_count, net_total, average_change, max_increase_date, max_increase, min_decrease_date, min_decrease])
+##### with open(output_path, "w") as csvfile:
+#####     csvwriter = csv.writer(csvfile)
+#####     csvwriter.writerow(['Total Months', 'Net Total', 'Average Change', 'Greatest Increase Date', 'Greatest Increase Amount', 'Greatest Decrease Date', 'Greatest Decrease Amount'])
+#####     csvwriter.writerow([total_months_count, net_total, average_change, max_increase_date, max_increase, min_decrease_date, min_decrease])
+
+with open(output_path, "w") as txtfile:
+    txtfile.write('Total Months: {}\n'.format(total_months_count))
+    txtfile.write('Net Total: {}\n'.format(net_total))
+    txtfile.write('Average Change: {}\n'.format(average_change))
+    txtfile.write('Greatest Increase Date: {}\n'.format(max_increase_date))
+    txtfile.write('Greatest Increase Amount: {}\n'.format(max_increase))
+    txtfile.write('Greatest Decrease Date: {}\n'.format(min_decrease_date))
+    txtfile.write('Greatest Decrease Amount: {}\n'.format(min_decrease))
+
+print("Data has been written to", output_path)

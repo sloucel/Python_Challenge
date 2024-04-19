@@ -1,0 +1,7 @@
+Total Months: 86
+Net Total: 22564198
+Average Change: -8311.105882352942
+Greatest Increase Date: Aug-16
+Greatest Increase Amount: 1862002.0
+Greatest Decrease Date: Feb-14
+Greatest Decrease Amount: -1825558.0

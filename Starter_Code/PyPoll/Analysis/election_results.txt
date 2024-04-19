@@ -1,0 +1,4 @@
+Candidate, Percentage of Votes, Total Votes
+Candidate: Charles Casper Stockham, Percentage of Votes: 23.049%, Total Votes: 85213
+Candidate: Diana DeGette, Percentage of Votes: 73.812%, Total Votes: 272892
+Candidate: Raymon Anthony Doane, Percentage of Votes: 3.139%, Total Votes: 11606

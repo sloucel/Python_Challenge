@@ -80,18 +80,20 @@ print(f"Winner: {winner}")
 
 ## Export results to a new csv file and place in the the Analysis Folder
 ### Output_path
-output_path = os.path.join("..", 'Analysis', 'election_results.csv')
+output_path = os.path.join("..", 'Analysis', 'election_results.txt')
 
 ##  Create a def block to simplify export .
-def candidate_data(csvwriter, candidate, votes, total_votes_cast):
+def candidate_data(txtfile, candidate, votes, total_votes_cast):
     percentage = (votes / total_votes_cast) * 100
-    csvwriter.writerow([candidate, f'{percentage:.3f}%', votes])
+    txtfile.write(f"Candidate: {candidate}, Percentage of Votes: {percentage:.3f}%, Total Votes: {votes}\n")
 
-## Taken from Python Module, Day 2, Activity 10 "Ins_ReadCSV"
-with open(output_path, "w") as csvfile:
-    csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(['Candidate', 'Percentage of Votes', 'Total Votes'])
+
+with open(output_path, "w") as txtfile:
+    # Write header
+    txtfile.write("Candidate, Percentage of Votes, Total Votes\n")
+    # Write data for each candidate
     for candidate, votes in candidate_votes.items():
-        candidate_data(csvwriter, candidate, votes, total_votes_cast)
+        candidate_data(txtfile, candidate, votes, total_votes_cast)
 
+print("Data has been written to", output_path)
 # python main.py
