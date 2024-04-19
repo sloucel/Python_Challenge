@@ -87,7 +87,6 @@ def candidate_data(txtfile, candidate, votes, total_votes_cast):
     percentage = (votes / total_votes_cast) * 100
     txtfile.write(f"Candidate: {candidate}, Percentage of Votes: {percentage:.3f}%, Total Votes: {votes}\n")
 
-
 with open(output_path, "w") as txtfile:
     # Write header
     txtfile.write("Candidate, Percentage of Votes, Total Votes\n")

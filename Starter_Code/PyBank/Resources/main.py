@@ -105,12 +105,6 @@ print(f'Greatest Decrease in Profits: {min_decrease_date} (${min_decrease_form})
 ### Output_path
 output_path = os.path.join("..", 'Analysis', 'financial_analysis.txt')
 
-## Taken from Python Module, Day 2, Activity 10 "Ins_ReadCSV"
-##### with open(output_path, "w") as csvfile:
-#####     csvwriter = csv.writer(csvfile)
-#####     csvwriter.writerow(['Total Months', 'Net Total', 'Average Change', 'Greatest Increase Date', 'Greatest Increase Amount', 'Greatest Decrease Date', 'Greatest Decrease Amount'])
-#####     csvwriter.writerow([total_months_count, net_total, average_change, max_increase_date, max_increase, min_decrease_date, min_decrease])
-
 with open(output_path, "w") as txtfile:
     txtfile.write('Total Months: {}\n'.format(total_months_count))
     txtfile.write('Net Total: {}\n'.format(net_total))
